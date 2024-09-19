@@ -1,5 +1,11 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 app=Flask(__name__)
+
+
+import sqlite3
+# connection=sqlite3.connect('data.db')
+# connection.execute('create table datatable(name text,place text,age int,id int)')
+
 
 @app.route('/')
 def fun1():
@@ -32,4 +38,21 @@ def fun6():
 @app.route('/third')
 def fun7():
     return render_template("third.html")
+
+
+@app.route('/form',methods=['POST','GET'])
+def fun8():
+    if request.method=='POST':
+        name=request.form['name']
+        id=int (request.form['id'])
+        place=request.form['place']
+        age=int (request.form['age'])
+        connection=sqlite3.connect('data.db')
+        connection.execute("insert into datatable(name,place,id,age)values(?,?,?,?)",(name,place,id,age))
+        connection.commit()
+
+
+
+    return render_template("form.html")
+
 app.run()
