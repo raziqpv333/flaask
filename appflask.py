@@ -55,4 +55,9 @@ def fun8():
 
     return render_template("form.html")
 
+@app.route('/display')
+def fun9():
+    connection=sqlite3.connect('data.db')
+    data=connection.execute("select * from datatable")
+    return render_template("display.html",data=data)
 app.run()
