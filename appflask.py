@@ -60,4 +60,30 @@ def fun9():
     connection=sqlite3.connect('data.db')
     data=connection.execute("select * from datatable")
     return render_template("display.html",data=data)
+
+
+
+
+@app.route('/update/<id>',methods=['POST','GET'])
+def fun10(id):
+    connection=sqlite3.connect('data.db')
+    data=connection.execute("select * from datatable where id=?",(id,))
+    if  request.method=='POST':
+        name=request.form['name']
+        place=request.form['place']
+        age=int(request.form['age'])
+        connection.execute("update datatable set name=?,age=?,place=? where id=?",(name,age,place,id))
+        connection.commit()
+    return render_template("update.html",data=data)  
+
+
+
+
+
+@app.route('/delete')
+def fun11():
+    connection=sqlite3.connect('data.db')
+    connection.execute("delete from datatable whre id=?",(id,))
+    connection.commit()
+    return render_template("display.html")      
 app.run()

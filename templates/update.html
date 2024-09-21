@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<form action="" method="POST">
+    {%for i in data%}
+    <label for="name">name</label>
+    <input type="text" value="{{i[0]}}" name="name">
+    <label for="place">place</label>
+    <input type="text" value="{{i[1]}}" name="place">
+    <label for="age" >AGE</label>
+    <input type="number" value="{{i[2]}}" name="age">
+    
+    <input type="submit" value="submit">
+    {%endfor%}
+
+    
+</form>
+
+
+
+</body>
+</html>
