@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 app=Flask(__name__)
 
 
@@ -80,10 +80,10 @@ def fun10(id):
 
 
 
-@app.route('/delete')
-def fun11():
+@app.route('/delete/<id>',)
+def fun11(id):
     connection=sqlite3.connect('data.db')
-    connection.execute("delete from datatable whre id=?",(id,))
+    connection.execute("delete from datatable where id=?",(id,))
     connection.commit()
-    return render_template("display.html")      
+    return redirect('../../display')
 app.run()
